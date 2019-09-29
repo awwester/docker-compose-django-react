@@ -1,13 +1,17 @@
-FROM python:3.4
+FROM python:3.7
+ENV PYTHONUNBUFFERED=1
 
+# Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/*
+RUN pip install pipenv
 
+# Install Project dependencies
 WORKDIR /app/api
-COPY requirements.txt /app/api
-RUN pip install -r requirements.txt
+COPY Pipfile* /app/api/
+RUN pipenv install --system --deploy --ignore-pipfile
 
+# Start up the server
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
