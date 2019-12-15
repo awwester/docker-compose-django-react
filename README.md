@@ -18,8 +18,10 @@ This is a starter project for my Django/react applications with many starting fe
 
 
 ## Running
-1. `docker-compose up`
-2. There should now be two servers running:
+1. `make setup`
+2. `make migrate`
+3. `docker-compose up`
+4. There should now be two servers running:
   - [http://127.0.0.1:8000](http://127.0.0.1:8000) is the Django app
   - [http://127.0.0.1:3000](http://127.0.0.1:3000) is the React app
 
